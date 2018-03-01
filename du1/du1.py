@@ -1,7 +1,7 @@
 import random
 import time
 
-MAX_LENGTH = 6
+MAX_LENGTH = 6 #počet cifer
 BASE = 10
 
 a = list()
@@ -109,7 +109,7 @@ def vynasob(x,y):
 #tupé nasobení a+a+a+a+a+a+a+a+
 def vynasobTupe(x,y):
     vysledek = list();
-    for i in range(int(''.join(map(str,y[::-1])))):
+    for i in range(int(''.join(map(str,y[::-1])))): #trochu podvod, ale na ilustraci pomalosti snad stačí
         vysledek = secti(vysledek, x)
     return vysledek
 
@@ -139,7 +139,7 @@ def deleniZbytek(x,y):
         r = odecti(r, vynasobJednoCif(vynasobeneMensi,q[i]))
     return q, r
 
-print("a: " + ''.join(str(x) for x in a[::-1]))
+print("a: " + ''.join(str(x) for x in a[::-1])) #''.join(str(x) for x in a[::-1]) převádí pole čísel a do čítelné podoby - pro debug
 print("b: " + ''.join(str(x) for x in b[::-1]))
 t = time.time()
 c = vynasob(a,b)
@@ -148,6 +148,7 @@ t = time.time()
 d = vynasobTupe(a,b)
 print("vypocet (tupé) trval: " + str((time.time() - t)*1000) + " ms")
 print("vysledek nasobeni: " + ''.join(str(x) for x in c[::-1]))
+
 q, r = deleniZbytek(a,b)
 
 print("a div b: " + ''.join(str(x) for x in q[::-1]))
