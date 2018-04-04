@@ -1,4 +1,5 @@
 import math
+from fractions import Fraction
 
 def splitNumber(number, partSize):
     numberStringRev = str(number)[::-1]
@@ -11,7 +12,7 @@ def splitNumber(number, partSize):
             NParts.append(0)
     return NParts
 
-A = 512342543253545463565462424545225354546356698698
+A = 5123425432535454635645463566986986356454635663564546356635645463566356454635663564546356
 B = 52423456789012345667892524234567890123456789012452543253545463565464564565465435242454522
 
 
@@ -93,9 +94,9 @@ def toom5(A,B):
     return vysledek
 '''
 def toom52(A,B):
-    print("#########")
-    print("A:" + str(A))
-    print("B:" + str(B))
+    #print("#########")
+    #print("A:" + str(A))
+    #print("B:" + str(B))
     if(A == 0 or B == 0):
         return 0
     if(A < 10**5 and B < 10**5):
@@ -111,6 +112,14 @@ def toom52(A,B):
     print("delka:" + str(delkaBloku))
     splitA = splitNumber(A, delkaBloku)
     splitB = splitNumber(B, delkaBloku)
+
+    degA = -1
+    degB = -1
+    for i in range(len(splitA)):
+        if(splitA[i] != 0):
+            degA = degA+1
+        if (splitB[i] != 0):
+            degB = degB + 1
 
     #print(splitA)
     #print(splitB)
@@ -140,7 +149,7 @@ def toom52(A,B):
     rHodnoty = list()
     for i in range(9):
         rHodnoty.append(round(toom52(splitP[i], splitQ[i]))) #nasobeni r(i) = p(i)*q(i)
-    print("hodnoty: ", rHodnoty)
+    #print("hodnoty: ", rHodnoty)
     #interpolace
     rKoef = list()
     '''
@@ -149,25 +158,25 @@ def toom52(A,B):
     rKoef.append(round((-205/144)*rHodnoty[0] + (4/5)*rHodnoty[1] + (4/5)*rHodnoty[2] + (-1/10)*rHodnoty[3] + (-1/10)*rHodnoty[4] + (4/315)*rHodnoty[5] + (4/315)*rHodnoty[6] + (-1/1120)*rHodnoty[7] + (-1/1120)*rHodnoty[8]))  # r2
     rKoef.append(round((-61/180)*rHodnoty[1] + (61/180)*rHodnoty[2] + (169/720)*rHodnoty[3] + (-169/720)*rHodnoty[4] + (-1/20)*rHodnoty[5] + (1/20)*rHodnoty[6] + (-7/1440)*rHodnoty[7] + (7/1440)*rHodnoty[8]))  # r3
     rKoef.append(round((91/192)*rHodnoty[0] + (-61/180)*rHodnoty[1] + (-61/180)*rHodnoty[2] + (169/1440)*rHodnoty[3] + (169/1440)*rHodnoty[4] + (-1/60)*rHodnoty[5] + (-1/60)*rHodnoty[6] + (7/5760)*rHodnoty[7] + (7/5760)*rHodnoty[8]))  # r4
-    rKoef.append(round((29/720)*rHodnoty[1] + (-29/720)*rHodnoty[2] + (-13/360)*rHodnoty[3] + (13/360)*rHodnoty[4] + (1/80)*rHodnoty[5] + (-1/80)*rHodnoty[6] + (1/720)*rHodnoty[7] + (1/-720)*rHodnoty[8]))  # r5
+    rKoef.append(round((29/720)*rHodnoty[1] + (-29/720)*rHodnoty[2] + (-13/360)*rHodnoty[3] + (13/360)*rHodnoty[4] + (1/80)*rHodnoty[5] + (-1/80)*rHodnoty[6] + (1/720)*rHodnoty[7] + (-1/720)*rHodnoty[8]))  # r5
     rKoef.append(round((-5/96)*rHodnoty[0] + (29/720)*rHodnoty[1] + (29/720)*rHodnoty[2] + (-13/720)*rHodnoty[3] + (-13/720)*rHodnoty[4] + (1/240)*rHodnoty[5] + (1/240)*rHodnoty[6] + (-1/2880)*rHodnoty[7] +(-1/2880)*rHodnoty[8]))  # r6
     rKoef.append(round((-1/720)*rHodnoty[1] + (1/720)*rHodnoty[2] + (1/720)*rHodnoty[3] + (-1/720)*rHodnoty[4] + (-1/1680)*rHodnoty[5] + (1/1680)*rHodnoty[6] + (-1/10080)*rHodnoty[7] + (1/10080)*rHodnoty[8]))  # r7
     rKoef.append(round((1/576)*rHodnoty[0] + (-1/720)*rHodnoty[1] + (-1/720)*rHodnoty[2] + (1/1440)*rHodnoty[3] + (1/1440)*rHodnoty[4] + (-1/5040)*rHodnoty[5] + (-1/5040)*rHodnoty[6] + (1/40320)*rHodnoty[7] +(1/40320)*rHodnoty[8]))  # r8
     '''
     rKoef.append(rHodnoty[0]) #r0
-    rKoef.append(round(672*rHodnoty[1] + (-672)*rHodnoty[2] + (-168)*rHodnoty[3] + (168)*rHodnoty[4] + (32)*rHodnoty[5] + (-32)*rHodnoty[6] + 3*rHodnoty[7] + (-3)*rHodnoty[8])/840) #r1
-    rKoef.append(round((-205/144)*rHodnoty[0] + (4/5)*rHodnoty[1] + (4/5)*rHodnoty[2] + (-1/10)*rHodnoty[3] + (-1/10)*rHodnoty[4] + (4/315)*rHodnoty[5] + (4/315)*rHodnoty[6] + (-1/1120)*rHodnoty[7] + (-1/1120)*rHodnoty[8]))  # r2
-    rKoef.append(round((-61/180)*rHodnoty[1] + (61/180)*rHodnoty[2] + (169/720)*rHodnoty[3] + (-169/720)*rHodnoty[4] + (-1/20)*rHodnoty[5] + (1/20)*rHodnoty[6] + (-7/1440)*rHodnoty[7] + (7/1440)*rHodnoty[8]))  # r3
-    rKoef.append(round((91/192)*rHodnoty[0] + (-61/180)*rHodnoty[1] + (-61/180)*rHodnoty[2] + (169/1440)*rHodnoty[3] + (169/1440)*rHodnoty[4] + (-1/60)*rHodnoty[5] + (-1/60)*rHodnoty[6] + (7/5760)*rHodnoty[7] + (7/5760)*rHodnoty[8]))  # r4
-    rKoef.append(round((29/720)*rHodnoty[1] + (-29/720)*rHodnoty[2] + (-13/360)*rHodnoty[3] + (13/360)*rHodnoty[4] + (1/80)*rHodnoty[5] + (-1/80)*rHodnoty[6] + (1/720)*rHodnoty[7] + (1/-720)*rHodnoty[8]))  # r5
-    rKoef.append(round((-5/96)*rHodnoty[0] + (29/720)*rHodnoty[1] + (29/720)*rHodnoty[2] + (-13/720)*rHodnoty[3] + (-13/720)*rHodnoty[4] + (1/240)*rHodnoty[5] + (1/240)*rHodnoty[6] + (-1/2880)*rHodnoty[7] +(-1/2880)*rHodnoty[8]))  # r6
-    rKoef.append(round((-1/720)*rHodnoty[1] + (1/720)*rHodnoty[2] + (1/720)*rHodnoty[3] + (-1/720)*rHodnoty[4] + (-1/1680)*rHodnoty[5] + (1/1680)*rHodnoty[6] + (-1/10080)*rHodnoty[7] + (1/10080)*rHodnoty[8]))  # r7
-    rKoef.append(round((1/576)*rHodnoty[0] + (-1/720)*rHodnoty[1] + (-1/720)*rHodnoty[2] + (1/1440)*rHodnoty[3] + (1/1440)*rHodnoty[4] + (-1/5040)*rHodnoty[5] + (-1/5040)*rHodnoty[6] + (1/40320)*rHodnoty[7] +(1/40320)*rHodnoty[8]))  # r8
+    rKoef.append(int(Fraction(round(672*rHodnoty[1] + (-672)*rHodnoty[2] + (-168)*rHodnoty[3] + (168)*rHodnoty[4] + (32)*rHodnoty[5] + (-32)*rHodnoty[6] + 3*rHodnoty[7] + (-3)*rHodnoty[8]),840))) #r1
+    rKoef.append(int(Fraction(round((-14350)*rHodnoty[0] + (8064)*rHodnoty[1] + (8064)*rHodnoty[2] + (-1008)*rHodnoty[3] + (-1008)*rHodnoty[4] + (128)*rHodnoty[5] + (128)*rHodnoty[6] + (-9)*rHodnoty[7] + (-9)*rHodnoty[8]),10080)))  # r2
+    rKoef.append(int(Fraction(round((-488)*rHodnoty[1] + (488)*rHodnoty[2] + (338)*rHodnoty[3] + (-338)*rHodnoty[4] + (-72)*rHodnoty[5] + (72)*rHodnoty[6] + (-7)*rHodnoty[7] + (7)*rHodnoty[8]),1440)))  # r3
+    rKoef.append(int(Fraction(round((2730)*rHodnoty[0] + (-1952)*rHodnoty[1] + (-1952)*rHodnoty[2] + (676)*rHodnoty[3] + (676)*rHodnoty[4] + (-96)*rHodnoty[5] + (-96)*rHodnoty[6] + (7)*rHodnoty[7] + (7)*rHodnoty[8]),5760)))  # r4
+    rKoef.append(int(Fraction(round((29)*rHodnoty[1] + (-29)*rHodnoty[2] + (-26)*rHodnoty[3] + (26)*rHodnoty[4] + (9)*rHodnoty[5] + (-9)*rHodnoty[6] + (1)*rHodnoty[7] + (-1)*rHodnoty[8]),720)))  # r5
+    rKoef.append(int(Fraction(round((-150)*rHodnoty[0] + (116)*rHodnoty[1] + (116)*rHodnoty[2] + (-52)*rHodnoty[3] + (-52)*rHodnoty[4] + (12)*rHodnoty[5] + (12)*rHodnoty[6] + (-1)*rHodnoty[7] +(-1)*rHodnoty[8]),2880)))  # r6
+    rKoef.append(int(Fraction(round((-14)*rHodnoty[1] + (14)*rHodnoty[2] + (14)*rHodnoty[3] + (-14)*rHodnoty[4] + (-6)*rHodnoty[5] + (6)*rHodnoty[6] + (-1)*rHodnoty[7] + (1)*rHodnoty[8]), 10080)))  # r7
+    rKoef.append(int(Fraction(round((70)*rHodnoty[0] + (-56)*rHodnoty[1] + (-56)*rHodnoty[2] + (28)*rHodnoty[3] + (28)*rHodnoty[4] + (-8)*rHodnoty[5] + (-8)*rHodnoty[6] + (1)*rHodnoty[7] +(1)*rHodnoty[8]), 40320)))  # r8
 
     vysledek = 0
-    print("koef: ", rKoef)
+    #print("koef: ", rKoef)
     baze = 10**delkaBloku
-    for i in range(len(rKoef)-1, -1, -1):
+    for i in range((degA+degB), -1, -1):
         vysledek = rKoef[i] + (baze)*vysledek
 
     if(not kladne):
@@ -187,5 +196,9 @@ vysl2 = 672*hodnoty[1] + (-672)*hodnoty[2] + (-168)*hodnoty[3] + (168)*hodnoty[4
 print(-168*hodnoty[3])
 mezi = 672*hodnoty[1] + (-672)*hodnoty[2] + (-168)*hodnoty[3] + 168*hodnoty[4]+32*hodnoty[5] + (-32)*hodnoty[6]+ 3*hodnoty[7] + (-3)*hodnoty[8]
 print("mezi: ", mezi)
-print(round(vysl2))
+
+a = round(vysl2)
+print(a)
+f = Fraction(a,840)
+print(int(f))
 print(round(round(vysl2)/840))
