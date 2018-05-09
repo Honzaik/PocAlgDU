@@ -15,7 +15,7 @@ def vratSude(a):
             evenA.append(a[i])
     return evenA
 
-def roundComplex(vysl):
+def roundComplex(vysl): #zaokrouhlování 
     newVysl = list()
     for v in vysl:
         a = round(v.real,5)
@@ -38,7 +38,7 @@ def recursiveComplexFFT(n, prim, a):
                 result[nHalf+i] = b[i]-(tempPrim)*c[i]
             return roundComplex(result)
 
-def rev(i,k):
+def rev(i,k): #rev funkce
     mask = '{0:0' + str(k) + 'b}'
     return int(mask.format(i)[::-1],2)
 
@@ -62,11 +62,11 @@ def iterativeComplexFFT(n, prim, a):
                 A[i+j+int(m/2)] = v2
     return roundComplex(A)
 
-vektor = [1,1,2,2,5,2,4,7]
+vektor = [1,1,2,2,5,2,4,7] #pocitani vektor
 n = len(vektor)
-myPrim = exp((2j*pi)/n)
-res = recursiveComplexFFT(n, myPrim, vektor)
+myPrim = exp((2j*pi)/n) #primitivni odmocnina
+res = recursiveComplexFFT(n, myPrim, vektor) #rekurzivni fft
 print(res)
 myPrim = exp((2j*pi)/n)
-res2 = iterativeComplexFFT(n, myPrim, vektor)
+res2 = iterativeComplexFFT(n, myPrim, vektor) #iterativni fft
 print(res2)
