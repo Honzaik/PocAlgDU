@@ -30,6 +30,8 @@ def ModPGCD(f,g):
     p=1
     while(True): ## nahrada za goto 4.
         p = PP.next(p) ## nové prvočíslo
+        if(d % p == 0):
+            continue
         Zp = PolynomialRing(GF(p),"x")
         h = (Zp(f).gcd(Zp(g)))
         h = h*Zp(d)*Zp(inverse_mod(int(h.coefficients()[::-1][0]),int(p))) #h = h*d*lc(h)^-1 
@@ -40,6 +42,8 @@ def ModPGCD(f,g):
             P = p
         while P <= 2*d*mez:
             p = PP.next(p)
+            if(d % p == 0):
+                continue
             Zp = PolynomialRing(GF(p),"x")
             h = (Zp(f).gcd(Zp(g)))
             h = h*Zp(d)*Zp(inverse_mod(int(h.coefficients()[::-1][0]),int(p))) #h = h*d*lc(h)^-1
